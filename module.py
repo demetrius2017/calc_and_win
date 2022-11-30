@@ -33,10 +33,16 @@ def get_user_attack():
     }
 
     for i in range(5):
-        input_attack = input('Введи тип атаки: ').lower()
+        while True:
+            input_attack = input('Введи тип атаки: ').lower()
+            if input_attack not in attacks_types:
+                print('Такого типа атаки нет.')
+                continue
+            else:
+                break
         attack_value = attacks_types[input_attack]()
         print(f'Количество очков твоей атаки: {attack_value}.')
-        total += 1
+        total += attack_value
     return total
 
 
@@ -52,6 +58,9 @@ def run_game():
     yes_no = {
         'Y': True,
         'N': False,
+        # Новые значения словаря.
+        'y': True,
+        'n': False,
     }
     replay = input('Чтобы сыграть ещё раз, введи "y"; '
                    'если не хочешь продолжать игру, введи "n": ')
